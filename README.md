@@ -5,7 +5,7 @@ Gioco della battaglia navale su terminale.
 ![alt text](https://cdn.discordapp.com/attachments/765646227303432232/1060286993399029921/game.png)
 
 ## Regole del gioco
-- Ogni nave è grande una cella e value da un `punteggio` compreso tra `1 e 5`.
+- Ogni nave è grande una cella e vale un `punteggio` compreso tra `1 e 5`.
 - Si hanno `25 colpi`.
 - Il `punteggio` da raggiungere per vincere il gioco è `15`.
 
