@@ -162,7 +162,7 @@ void AreaGioco::inserisciCoordinate(WINDOW *win, int &x, int &y) {
         #endif
         
         y_char = coords[0];
-        if(checkIfIsValidChar(y_char)) {
+        if(checkIfIsValidChar(y_char) && coords.length() > 1) {
             y_int = trasformaCoordCharInInt(y_char, 65, 75);
             coords.erase(coords.begin());
         } else {
