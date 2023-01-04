@@ -32,7 +32,7 @@ void useMenu(WINDOW *win, vector<string> list, int &choice, int &selected) {
 
 void visualizzaMenuGiocoInizio(WINDOW *terminale) {
     wclear(terminale);
-    WINDOW *menu = newwin(9, 35, (Y_DIM_TERMINALE-13)/2, X_CENTER+(getmaxx(terminale)-35)/2);
+    WINDOW *menu = newwin(9, 35, (Y_DIM_TERMINALE-13)/2, (getmaxx(stdscr)-X_DIM_TERMINALE)/2+(getmaxx(terminale)-35)/2);
     keypad(menu, true);
     box(menu, 0, 0);
     box(terminale, 0, 0);
@@ -54,7 +54,7 @@ void visualizzaMenuGiocoInizio(WINDOW *terminale) {
     while(continua_selezione) {
         printMenu(menu, 6, options, selected);
         useMenu(menu, options, choice, selected);
-        if(choice == 10) {
+        if(choice == KEY_VALUE_ENTER) {
             switch(selected) {
                 case 0:
                     start_game = true;
@@ -68,6 +68,7 @@ void visualizzaMenuGiocoInizio(WINDOW *terminale) {
     }
 
     if(!start_game) {
+        endwin();
         exit(0);
     }
 
@@ -78,7 +79,7 @@ void visualizzaMenuGiocoInizio(WINDOW *terminale) {
 
 void visualizzaMenuGiocoFine(WINDOW *terminale, bool &gioca_ancora, int punteggio) {
     wclear(terminale);
-    WINDOW *menu = newwin(9, 35, (Y_DIM_TERMINALE-13)/2, X_CENTER+(getmaxx(terminale)-35)/2);
+    WINDOW *menu = newwin(9, 35, (Y_DIM_TERMINALE-13)/2, (getmaxx(stdscr)-X_DIM_TERMINALE)/2+(getmaxx(terminale)-35)/2);
     keypad(menu, true);
     box(menu, 0, 0);
     box(terminale, 0, 0);
@@ -111,7 +112,7 @@ void visualizzaMenuGiocoFine(WINDOW *terminale, bool &gioca_ancora, int punteggi
         printMenu(menu, 6, options, selected);
         useMenu(menu, options, choice, selected);
 
-        if(choice == 10) {
+        if(choice == KEY_VALUE_ENTER) {
             switch(selected) {
                 case 0:
                     gioca_ancora = true;

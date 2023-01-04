@@ -22,7 +22,7 @@ void AreaGioco::creaAreaGioco() {
 }
 
 void AreaGioco::visualizzaAreaGioco(WINDOW *win) {
-    int center_matrix = X_CENTER+(getmaxx(win)-22)/2;
+    int center_matrix = (getmaxx(stdscr)-X_DIM_TERMINALE)/2+(getmaxx(win)-22)/2;
     WINDOW *matrix = newwin(11, 22, getmaxy(win)/2, center_matrix);
 
     for(int i = 0; i < area.size(); i++) {
@@ -131,32 +131,27 @@ void AreaGioco::inserisciCoordinate(WINDOW *win, int &x, int &y) {
 
         int value;
         int counter = 0;
-
         do {
             wmove(win, 1, 43+counter);
-            counter < 8 ? echo() : noecho();  
+            counter < KEY_VALUE_BACKSPACE ? echo() : noecho();  
             value = wgetch(win);
 
-            switch(value) {
-                case 8:
-                    if(counter == 0) {
-                        break;
-                    }
-                    counter--;
-                    wmove(win, 1, 43+counter);
-                    wprintw(win, " ");
-                    coords.pop_back();
-                    break;
-                default:
-                    if(counter <= 7 && value != '\n') {
-                        counter++;
-                        coords.push_back(value);
-                    }
+            if(value == KEY_VALUE_BACKSPACE && counter != 0) {
+                counter--;
+                wmove(win, 1, 43+counter);
+                wprintw(win, " ");
+                coords.pop_back();
+            } else { 
+                if(counter <= 7 && value != KEY_VALUE_ENTER) {
+                    counter++;
+                    coords.push_back(value);
+                }
             }
-        } while(value != '\n');
+        } while(value != KEY_VALUE_ENTER);
 
         #if ENABLE_DEBUG__
             if(coords == ":exit:") {
+                endwin();
                 exit(1);
             }
         #endif

@@ -12,7 +12,7 @@
 *                                                                            *
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
 // Developed by Federico Panarotto
-// Current Version: 1.2
+// Current Version: 1.3
 // GIOCO GRAFICO DI BATTAGLIA NAVALE SU TERMINALE
 
 #include "headers/library_declaration.h"
@@ -29,13 +29,14 @@ int main() {
     checkTerminalHasColors();
     keypad(stdscr, true);
 
-    bool gioca_ancora = false;
-    WINDOW *terminale = newwin(Y_DIM_TERMINALE, X_DIM_TERMINALE, 0, X_CENTER);
-    WINDOW *titolo = newwin(4, X_DIM_TERMINALE-2, 1, X_CENTER+1);
-    WINDOW *gioco = newwin(12, X_DIM_TERMINALE-2, getmaxy(titolo)+1, X_CENTER+1);
-    WINDOW *output = newwin(6, X_DIM_TERMINALE-2, getmaxy(titolo)+getmaxy(gioco)+1, X_CENTER+1);
-    WINDOW *input = newwin(4, X_DIM_TERMINALE-2, getmaxy(titolo)+getmaxy(gioco)+getmaxy(output)+1, X_CENTER+1);
+    int center_win = (getmaxx(stdscr)-X_DIM_TERMINALE)/2;
+    WINDOW *terminale = newwin(Y_DIM_TERMINALE, X_DIM_TERMINALE, 0, center_win);
+    WINDOW *titolo = newwin(4, X_DIM_TERMINALE-2, 1, center_win+1);
+    WINDOW *gioco = newwin(12, X_DIM_TERMINALE-2, getmaxy(titolo)+1, center_win+1);
+    WINDOW *output = newwin(6, X_DIM_TERMINALE-2, getmaxy(titolo)+getmaxy(gioco)+1, center_win+1);
+    WINDOW *input = newwin(4, X_DIM_TERMINALE-2, getmaxy(titolo)+getmaxy(gioco)+getmaxy(output)+1, center_win+1);
 
+    bool gioca_ancora = false;
     visualizzaMenuGiocoInizio(terminale);
 
     do {
@@ -88,7 +89,7 @@ int main() {
             mvwprintw(input, 1, 1, "MI DISPIACE HAI PERSO!");
         }
 
-        mvwprintw(input, 2, 1, "Premi un tasto per uscire dal gioco...");
+        mvwprintw(input, 2, 1, "Premi un tasto per terminare il gioco...");
         areaGioco.visualizzaPosizioniNavi();
         areaGioco.visualizzaAreaGioco(gioco);
 

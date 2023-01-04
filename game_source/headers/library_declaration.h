@@ -26,7 +26,6 @@ using namespace std;
 // Costanti riservate alla dimensione del terminale
 const int Y_DIM_TERMINALE = 28;
 const int X_DIM_TERMINALE = 65;
-const int X_CENTER = X_DIM_TERMINALE/2;
 
 // Costanti riservate alla struttura del gioco
 const char ACQUA = '~';
@@ -34,6 +33,9 @@ const char NAVE_COLPITA = 'C';
 const char COLPO_A_VUOTO = 'X';
 const char POS_NAVE = 'N';
 const int SIZE = 10;
+
+const int KEY_VALUE_BACKSPACE = 8;
+const int KEY_VALUE_ENTER = 10;
 
 // Se il debug è abilitato mostra i config del gioco di DEBUG
 #if ENABLE_DEBUG__
