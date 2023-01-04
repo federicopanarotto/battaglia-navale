@@ -1,0 +1,1 @@
+g++ main.cpp src/functions.cpp src/Cella.cpp src/AreaGioco.cpp src/menu.cpp -o battaglia_navale.exe -lncursesw
